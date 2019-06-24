@@ -12,6 +12,8 @@ def home():
 def convert():
     ydl_opts = {
         'format': 'bestaudio/best',
+        'outtmpl': './MP3/%(title)s.%(ext)s',
+        'forcefilename': 'True',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
@@ -19,11 +21,18 @@ def convert():
         }],
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([request.form['url']])
-    return render_template('done.html')
+        url = request.form['url']
+        info_dict = ydl.extract_info(url)
+        fn = ydl.prepare_filename(info_dict).replace('webm', 'mp3')
+        ydl.download([url])
+    return render_template('done.html', download_path=fn)
 
 @app.route('/done')
 def done():
+    return render_template('done.html')
+
+@app.route('/download')
+def download():
     return render_template('done.html')
 
 @app.errorhandler(404)
