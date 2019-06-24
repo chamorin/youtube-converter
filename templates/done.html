@@ -3,11 +3,12 @@
 <head>
     <title>Youtube-Converter [ DONE ]</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Cutive+Mono&display=swap" rel="stylesheet"> 
 </head>
 
 <body>
     <div class="center">
-        <h1 id="title">Video converted!</h1>
+        <h1 class="title">Video converted!</h1>
         <form action="/download/{{ download_path }}" method="GET">
             <input type="submit" value="Download" />
         </form>

@@ -3,13 +3,14 @@
 <head>
     <title>Youtube-Converter</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Cutive+Mono&display=swap" rel="stylesheet"> 
 </head>
 
 <body>
     <div class="center">
-        <h1 id="title">Youtube converter</h1>
+        <span class="title"><b id=you>You</b>tube converter</span>
         <form action="/convert" method="POST">
-            <input type="text" placeholder="Enter Youtube video URL.." name="url">
+            <input type="url" placeholder="Enter Youtube video URL.." name="url">
             <input type="submit" value="Convert" />
         </form>
     </div>
