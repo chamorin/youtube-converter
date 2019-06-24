@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 youtube-dl = "*"
 gunicorn = "*"
+ffmpeg = "*"
 
 [requires]
 python_version = "3.6"
