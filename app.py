@@ -1,10 +1,14 @@
 from __future__ import unicode_literals
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_file
 import youtube_dl
+import os
+
+from config import MP3_DIRECTORY
 
 app = Flask(__name__)
 
-MP3_DIRECTORY = './MP3' # must be in config.py
+if not os.path.exists(MP3_DIRECTORY):
+    os.makedirs(MP3_DIRECTORY)
 
 @app.route('/')
 def home():
@@ -35,8 +39,7 @@ def done():
 
 @app.route('/download/<download_path>')
 def download(download_path = None):
-    send_from_directory(MP3_DIRECTORY, download_path, as_attachment=True)
-    return render_template('done.html')
+   return send_file(MP3_DIRECTORY+'/'+download_path, as_attachment=True)
 
 @app.errorhandler(404)
 def page_not_found(e):
