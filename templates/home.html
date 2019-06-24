@@ -1,9 +1,18 @@
 <!doctype html>
-<title>Home</title>
-{% if name %}
-<h1>Hello {{ name }}!</h1>
-{% else %}
-<h1>Hello!</h1>
-{% endif %}
+
+<head>
+    <title>Youtube-Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+    <div class="center">
+        <h1 id="title">Youtube converter</h1>
+        <form action="/convert" method="POST">
+            <input type="text" placeholder="Enter Youtube video URL.." name="url">
+            <input type="submit" value="convert" />
+        </form>
+    </div>
+</body>
 
 </html>
