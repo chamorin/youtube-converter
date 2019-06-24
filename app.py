@@ -10,15 +10,20 @@ app = Flask(__name__)
 if not os.path.exists(MP3_DIRECTORY):
     os.makedirs(MP3_DIRECTORY)
 
+
 @app.route('/')
 def home():
     return render_template('home.html')
 
+
 @app.route('/convert', methods=['POST'])
 def convert():
+    if not request.form['url']:
+        return render_template('home.html')
+
     ydl_opts = {
         'format': 'bestaudio/best',
-        'outtmpl': './MP3/%(title)s.%(ext)s',
+        'outtmpl': MP3_DIRECTORY+'/%(title)s.%(ext)s',
         'forcefilename': 'True',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
@@ -33,16 +38,20 @@ def convert():
         ydl.download([url])
     return render_template('done.html', download_path=fn)
 
+
 @app.route('/done')
 def done():
     return render_template('done.html')
 
+
 @app.route('/download/<download_path>')
-def download(download_path = None):
+def download(download_path=None):
    return send_file(MP3_DIRECTORY+'/'+download_path, as_attachment=True)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
 
 app.run(port=3000, debug=True)
