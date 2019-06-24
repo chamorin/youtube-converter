@@ -8,7 +8,8 @@
 <body>
     <div class="center">
         <h1 id="title">Video converted!</h1>
-        <form action="/download" method="POST">
+        <form action="/download/{{ download_path }}" method="GET">
+            {{ download_path }}
             <input type="submit" value="download" />
         </form>
     </div>
