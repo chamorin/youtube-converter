@@ -4,11 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pep8 = "*"
 
 [packages]
 flask = "*"
 youtube-dl = "*"
 gunicorn = "*"
+ffmpeg = "*"
+ffprobe = "*"
 
 [requires]
 python_version = "3.6"
